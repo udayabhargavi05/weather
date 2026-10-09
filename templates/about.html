@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block title %}About | SkyCast{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">ABOUT THE PROJECT</p>
+    <h1>Weather information made simple</h1>
+    <p>
+        SkyCast is a weather forecasting web application built
+        using Python and Flask.
+    </p>
+</section>
+
+<section class="info-grid">
+    <article class="info-card">
+        <h2>Current Weather</h2>
+        <p>Find temperature, humidity, wind speed, and conditions.</p>
+    </article>
+    <article class="info-card">
+        <h2>Seven-Day Forecast</h2>
+        <p>Review daily maximum and minimum temperatures.</p>
+    </article>
+    <article class="info-card">
+        <h2>Technology</h2>
+        <p>Python, Flask, HTML, CSS, Open-Meteo, Docker, Kubernetes,
+           Jenkins, and Git.</p>
+    </article>
+</section>
+
+<p class="source-note">
+    Weather data is provided by Open-Meteo.
+    Forecasts are informational and may change.
+</p>
+{% endblock %}

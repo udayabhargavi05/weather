@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% block title %}Current Weather | SkyCast{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
+    <h1>Explore the weather around you</h1>
+    <p>Search any city to see its current weather conditions.</p>
+
+    <form action="/" method="get" class="search-form">
+        <input type="text" name="city"
+               value="{{ city }}" placeholder="Enter a city"
+               required>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+{% if error %}
+    <div class="alert">{{ error }}</div>
+{% endif %}
+
+{% if weather %}
+<section class="weather-card">
+    <p class="eyebrow">CURRENT CONDITIONS</p>
+    <h2>{{ weather.city }}, {{ weather.country }}</h2>
+    <p class="condition">
+        {{ weather.current.weather_code | weather_description }}
+    </p>
+    <div class="temperature">
+        {{ weather.current.temperature_2m }}°C
+    </div>
+    <div class="stats">
+        <div class="stat">
+            <span>Feels like</span>
+            <strong>{{ weather.current.apparent_temperature }}°C</strong>
+        </div>
+        <div class="stat">
+            <span>Humidity</span>
+            <strong>{{ weather.current.relative_humidity_2m }}%</strong>
+        </div>
+        <div class="stat">
+            <span>Wind speed</span>
+            <strong>{{ weather.current.wind_speed_10m }} km/h</strong>
+        </div>
+    </div>
+    <a class="button-link"
+       href="{{ url_for('forecast', city=weather.city) }}">
+        View 7-day forecast
+    </a>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+
+{% block title %}7-Day Forecast | SkyCast{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">PLAN AHEAD</p>
+    <h1>Seven-day forecast</h1>
+    <form action="/forecast" method="get" class="search-form">
+        <input type="text" name="city"
+               value="{{ city }}" placeholder="Enter a city" required>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+{% if error %}
+    <div class="alert">{{ error }}</div>
+{% endif %}
+
+{% if weather %}
+    <h2>{{ weather.city }}, {{ weather.country }}</h2>
+    <div class="forecast-grid">
+        {% for i in range(weather.daily.time | length) %}
+        <article class="forecast-card">
+            <h3>{{ weather.daily.time[i] }}</h3>
+            <p>{{ weather.daily.weather_code[i] | weather_description }}</p>
+            <p class="high">
+                {{ weather.daily.temperature_2m_max[i] }}°C
+            </p>
+            <p class="low">
+                Low: {{ weather.daily.temperature_2m_min[i] }}°C
+            </p>
+            <p>
+                Rain chance:
+                {{ weather.daily.precipitation_probability_max[i] }}%
+            </p>
+        </article>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
