@@ -1,27 +1,21 @@
 
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: weather-forecast-deployment
-
 spec:
   replicas: 2
-
   selector:
     matchLabels:
       app: weather-forecast
-
   template:
     metadata:
       labels:
         app: weather-forecast
-
     spec:
       containers:
         - name: weather-forecast
-          image: weather-forecast:latest
+          image: udaya893/sample:weather-forecast
           imagePullPolicy: Always
-
           ports:
             - containerPort: 5000
