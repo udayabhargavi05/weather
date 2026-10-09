@@ -22,13 +22,15 @@ pipeline {
                 
             }
         }
-        stage('Deploy to Kubernetes') { 
-            steps { 
-                    // apply deployment & service 
-                    bat 'kubectl apply -f deployment.yaml --validate=false' 
-                    bat 'kubectl apply -f service.yaml' 
-            } 
-        }
+       stage('Deploy to Kubernetes') {
+    steps {
+        bat 'kubectl apply -f k8/deployment.yaml'
+        bat 'kubectl apply -f k8/service.yaml'
+
+        bat 'kubectl rollout restart deployment/weather-forecast-deployment'
+        bat 'kubectl rollout status deployment/weather-forecast-deployment --timeout=180s'
+    }
+}
     }
     post {
         success {
